@@ -1,0 +1,28 @@
+{
+  "name": "poll-time",
+  "version": "1.0.0",
+  "description": "A polling application using web sockets",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robbielane/poll-time.git"
+  },
+  "keywords": [
+    "Polls",
+    "Web",
+    "Sockets"
+  ],
+  "author": "Robbie Lane",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robbielane/poll-time/issues"
+  },
+  "homepage": "https://github.com/robbielane/poll-time#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
