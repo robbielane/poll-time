@@ -1,5 +1,6 @@
+'use strict'
+
 const express    = require('express');
-const http       = require('http');
 const path       = require('path');
 const bodyParser = require('body-parser');
 const socketIo   = require('socket.io');
@@ -13,6 +14,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html');
+});
+
+app.get('/polls/:id', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 

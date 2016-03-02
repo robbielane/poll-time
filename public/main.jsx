@@ -1,28 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import io from 'socket.io-client';
+import { Router, Route, browserHistory, History } from 'react-router';
 
-const socket = io();
+import App from './components/App.jsx';
+import NewPoll from './components/NewPoll.jsx';
 
 
-var NewPoll = React.createClass({
-  componentDidMount() {
-    socket.on('statusMessage', function (message) {
-      console.log('you are connected')
-    });
-  },
+var routes = (
+   <Router history={browserHistory}>
+     <Route path="/" component={NewPoll}/>
+     <Route path="/polls/:pollId" component={App}/>
+   </Router>
+)
 
-  createNewPoll() {
-    socket.emit('test')
-  },
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.createNewPoll} className='btn btn-primary btn-default'>Create new Poll</button>
-      </div>
-    )
-  }
-});
-
-ReactDOM.render(<NewPoll />, document.querySelector('#main'));
+ReactDOM.render(routes, document.querySelector('#main'));
