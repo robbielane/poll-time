@@ -26,6 +26,11 @@ body {
   margin-top: 5px;
 }
 
+.response-form input[type=checkbox] {
+  width:auto;
+  display: inline-block;
+}
+
 .response-form input {
   width: 85%;
   margin: 10px auto;

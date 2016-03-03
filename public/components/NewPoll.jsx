@@ -13,7 +13,8 @@ var NewPoll = React.createClass({
     return {
       question: null,
       responses: { 1: null, 2: null },
-      urls: { admin: null, poll: null }
+      urls: { admin: null, poll: null },
+      hideResults: false
     }
   },
 
@@ -31,6 +32,7 @@ var NewPoll = React.createClass({
     let pollId = h.generateId();
     let pollData = {};
     pollData['question'] = this.state.question;
+    pollData['hideResults'] = this.refs.results.checked;
     pollData['responses'] = {};
     for (const key of Object.keys(this.state.responses)) {
       const val = this.state.responses[key];
@@ -75,6 +77,8 @@ var NewPoll = React.createClass({
       <div className="response-form col-sm-6 col-sm-offset-3">
         <QuestionInput updateQuestion={this.updateQuestion} />
         {Object.keys(this.state.responses).map(this.renderForm)}
+        <input type='checkbox' defaultChecked={this.state.hideResults} ref='results' />
+        <span> Hide Results From Voters</span><br />
         <button onClick={this.addInput} className='btn btn-warning btn-default'>Add Another Response</button>
         <button onClick={this.createNewPoll} className='btn btn-primary btn-default'>Submit</button>
         {Object.keys(this.state.urls).map(this.renderUrl)}
