@@ -64,7 +64,7 @@ var NewPoll = React.createClass({
   renderUrl(key) {
     if (this.state.urls.poll) {
       return (
-        <div key={key}>
+        <div key={key} className='urls'>
           <p>{key}: <a href={this.state.urls[key]} >{this.state.urls[key]}</a></p>
         </div>
       )
