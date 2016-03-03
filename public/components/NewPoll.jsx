@@ -31,9 +31,10 @@ var NewPoll = React.createClass({
     let pollId = h.generateId();
     let pollData = {};
     pollData['question'] = this.state.question;
+    pollData['responses'] = {};
     for (const key of Object.keys(this.state.responses)) {
       const val = this.state.responses[key];
-      pollData[val] = 0;
+      pollData['responses'][val] = 0;
     }
     socket.emit('newPoll', pollId, pollData);
     this.generateLinks(pollId);
