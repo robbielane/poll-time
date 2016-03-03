@@ -30,10 +30,11 @@ var NewPoll = React.createClass({
 
   createNewPoll() {
     let pollId = h.generateId();
-    let pollData = {};
-    pollData['question'] = this.state.question;
-    pollData['hideResults'] = this.refs.results.checked;
-    pollData['responses'] = {};
+    let pollData = {
+      question: this.state.question,
+      hideResults: this.refs.results.checked,
+      responses: {}
+    };
     for (const key of Object.keys(this.state.responses)) {
       const val = this.state.responses[key];
       pollData['responses'][val] = 0;

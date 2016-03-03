@@ -11,6 +11,7 @@ var App = React.createClass({
     return {
       pollId: null,
       question: null,
+      hideResults: null,
       responses: {}
     }
   },
@@ -23,7 +24,8 @@ var App = React.createClass({
     let pollId    = this.props.routeParams.pollId
     let question  = data[pollId].question;
     let responses = data[pollId].responses;
-    this.setState({ pollId: pollId, question: question, responses: responses })
+    let hideResults = data[pollId].hideResults;
+    this.setState({ pollId: pollId, question: question, responses: responses, hideResults: hideResults })
   },
 
   handleVote(vote) {
@@ -37,11 +39,12 @@ var App = React.createClass({
   },
 
   render() {
+    let results = this.state.hideResults ? null : <PollResults responses={this.state.responses} />;
     return (
       <div className='poll container-fluid'>
         <h3>{this.state.question}</h3>
         {Object.keys(this.state.responses).map(this.renderResponse)}
-        <PollResults responses={this.state.responses} />
+        {results}
       </div>
       )
   }
