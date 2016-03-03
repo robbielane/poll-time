@@ -1,6 +1,9 @@
 import React from 'react';
 import io from 'socket.io-client';
 
+import PollResults from './PollResults.jsx'
+import ResponseButton from './ResponseButton.jsx'
+
 const socket = io();
 
 var App = React.createClass({
@@ -38,19 +41,9 @@ var App = React.createClass({
       <div className='poll container-fluid'>
         <h3>{this.state.question}</h3>
         {Object.keys(this.state.responses).map(this.renderResponse)}
+        <PollResults responses={this.state.responses} />
       </div>
       )
-  }
-});
-
-var ResponseButton = React.createClass({
-  render() {
-    let name = this.props.name
-    return (
-      <div className='poll-button col-sm-3'>
-        <button onClick={this.props.handleVote.bind(null, name)} className='btn btn-default'>{name}</button>
-      </div>
-    )
   }
 });
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import io from 'socket.io-client';
 
+import PollResults from './PollResults.jsx'
+
 const socket = io();
 
 var Admin = React.createClass({
@@ -29,22 +31,6 @@ var Admin = React.createClass({
         <PollResults responses={this.state.responses} />
       </div>
     )
-  }
-});
-
-var PollResults = React.createClass({
-  renderResponse(key) {
-    return <li key={key}>{key}: {this.props.responses[key]}</li>
-  },
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {Object.keys(this.props.responses).map(this.renderResponse)}
-        </ul>
-      </div>
-      )
   }
 });
 
