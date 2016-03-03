@@ -38,7 +38,6 @@ var NewPoll = React.createClass({
     }
     socket.emit('newPoll', pollId, pollData);
     this.generateLinks(pollId);
-    // this.context.router.push(`/polls/${pollId}`);
   },
 
   generateLinks(pollId) {

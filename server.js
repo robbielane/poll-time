@@ -40,5 +40,12 @@ io.on('connection', (socket) => {
     console.log(polls);
   });
 
+  socket.emit('pollData', polls);
+
+  socket.on('vote', (vote, pollId) => {
+    polls[pollId].responses[vote]++
+    console.log(polls)
+  });
+
   socket.emit('statusMessage', 'You are connected!');
 });

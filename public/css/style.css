@@ -35,3 +35,9 @@ body {
 .urls {
   margin-top: 20px;
 }
+
+.poll-button button {
+  width: 90%;
+  height: 100px;
+  margin: 0 auto;
+}
