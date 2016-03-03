@@ -20,8 +20,18 @@ body {
   border-radius: 10px;
 }
 
+.response-form label {
+  float: left;
+  text-align: left;
+  margin-top: 5px;
+}
+
 .response-form input {
-  width: 80%;
+  width: 85%;
   margin: 10px auto;
   display: block;
+}
+
+.urls {
+  margin-top: 20px;
 }
