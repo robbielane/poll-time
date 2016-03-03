@@ -43,3 +43,16 @@ body {
   border-radius: 10px;
   margin: 0 auto;
 }
+
+.poll-results {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 25px;
+  border: 1px solid #666;
+  border-radius: 10px;
+}
+
+.poll-results .bar {
+  height: 50px;
+  background-color: #f06d06;
+}

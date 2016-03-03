@@ -15,7 +15,7 @@ var Admin = React.createClass({
   },
 
   componentDidMount() {
-    socket.on('pollData', this.handleData.bind(this));
+    socket.on('pollData', this.handleData);
   },
 
   handleData(data) {
@@ -27,7 +27,7 @@ var Admin = React.createClass({
 
   render() {
     return (
-      <div className='poll-results'>
+      <div>
         <PollResults responses={this.state.responses} />
       </div>
     )
