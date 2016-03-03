@@ -9,7 +9,7 @@ const socket = io();
 var App = React.createClass({
   getInitialState() {
     return {
-      pollId: null,
+      pollId: this.props.routeParams.pollId,
       question: null,
       hideResults: null,
       responses: {}
@@ -17,15 +17,12 @@ var App = React.createClass({
   },
 
   componentDidMount() {
+    socket.emit('pollRequest', this.props.routeParams.pollId);
     socket.on('pollData', this.handleData);
   },
 
   handleData(data) {
-    let pollId    = this.props.routeParams.pollId
-    let question  = data[pollId].question;
-    let responses = data[pollId].responses;
-    let hideResults = data[pollId].hideResults;
-    this.setState({ pollId: pollId, question: question, responses: responses, hideResults: hideResults })
+    this.setState(data);
   },
 
   handleVote(vote) {
