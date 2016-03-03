@@ -26,6 +26,11 @@ body {
   margin-top: 5px;
 }
 
+.response-form input[type=checkbox] {
+  width:auto;
+  display: inline-block;
+}
+
 .response-form input {
   width: 85%;
   margin: 10px auto;
@@ -34,4 +39,25 @@ body {
 
 .urls {
   margin-top: 20px;
+}
+
+.poll-button button {
+  width: 90%;
+  height: 100px;
+  border: 1px solid #666;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.poll-results {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 25px;
+  border: 1px solid #666;
+  border-radius: 10px;
+}
+
+.poll-results .bar {
+  height: 50px;
+  background-color: #f06d06;
 }

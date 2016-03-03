@@ -26,6 +26,10 @@ app.get('/polls/:id', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/polls/:id/admin', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html');
+});
+
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
 });
@@ -37,6 +41,14 @@ io.on('connection', (socket) => {
 
   socket.on('newPoll', (pollId, responses) => {
     polls[pollId] = responses;
+    console.log(polls);
+  });
+
+  socket.emit('pollData', polls);
+
+  socket.on('vote', (vote, pollId) => {
+    polls[pollId].responses[vote]++;
+    io.sockets.emit('pollData', polls);
     console.log(polls);
   });
 
