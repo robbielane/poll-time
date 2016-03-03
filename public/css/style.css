@@ -39,5 +39,7 @@ body {
 .poll-button button {
   width: 90%;
   height: 100px;
+  border: 1px solid #666;
+  border-radius: 10px;
   margin: 0 auto;
 }
