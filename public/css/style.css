@@ -72,3 +72,8 @@ body {
   font-weight: 800;
   margin-right: 5px;
 }
+
+.close-btn {
+  display: block;
+  margin: 10px auto;
+}

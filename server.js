@@ -54,5 +54,10 @@ io.on('connection', (socket) => {
     console.log(polls);
   });
 
+  socket.on('endPoll', (pollId) => {
+    polls[pollId].active = false;
+    io.sockets.emit('pollData', polls[pollId]);
+  });
+
   socket.emit('statusMessage', 'You are connected!');
 });

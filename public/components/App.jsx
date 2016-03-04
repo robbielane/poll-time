@@ -13,7 +13,8 @@ var App = React.createClass({
       question: null,
       hideResults: null,
       responses: {},
-      voted: false
+      voted: false,
+      active: true
     }
   },
 
@@ -41,10 +42,16 @@ var App = React.createClass({
 
   render() {
     let results = this.state.hideResults ? null : <PollResults responses={this.state.responses} />;
+    let active
+    if (this.state.active) {
+      active = Object.keys(this.state.responses).map(this.renderResponse)
+    } else {
+      active = <h3>This Poll has ended</h3>
+    }
     return (
       <div className='poll container-fluid'>
         <h3>{this.state.question}</h3>
-        {Object.keys(this.state.responses).map(this.renderResponse)}
+        {active}
         {results}
       </div>
       )
