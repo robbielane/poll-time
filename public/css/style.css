@@ -58,6 +58,7 @@ body {
   height: 50px;
   background-color: #f06d06;
   margin-bottom: 20px;
+  transition: 1s;
 }
 
 .poll-results .bar .bar-number {
