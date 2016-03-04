@@ -10,7 +10,8 @@ var Admin = React.createClass({
     return {
       pollId: this.props.routeParams.pollId,
       question: null,
-      responses: {}
+      responses: {},
+      active: true
     }
   },
 
@@ -23,10 +24,23 @@ var Admin = React.createClass({
     this.setState(data);
   },
 
+  handleEndPoll() {
+    if (confirm('Are you sure?')) {
+      socket.emit('endPoll', this.state.pollId)
+      this.setState({ active: false });
+    };
+  },
+
   render() {
     return (
       <div>
         <PollResults responses={this.state.responses} />
+        <button
+          onClick={this.handleEndPoll}
+          className='close-btn btn btn-danger'
+        disabled={!this.state.active}>
+          Close Poll
+        </button>
       </div>
     )
   }

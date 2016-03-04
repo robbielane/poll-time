@@ -9,9 +9,13 @@ var ResponseInput = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className='form-group'>
         <label>Response: </label>
-        <input ref='responseInput' type='text' onKeyUp={this.updateResponse} />
+        <input
+          ref='responseInput'
+          type='text'
+          onKeyUp={this.updateResponse}
+        className='form-control'/>
       </div>
     )
   }

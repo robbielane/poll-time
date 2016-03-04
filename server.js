@@ -4,6 +4,7 @@ const express    = require('express');
 const path       = require('path');
 const bodyParser = require('body-parser');
 const socketIo   = require('socket.io');
+const schedule   = require('node-schedule');
 const app        = express();
 const polls      = {};
 
@@ -39,8 +40,12 @@ const io = socketIo(server);
 io.on('connection', (socket) => {
   console.log('A user has connected.', io.engine.clientsCount);
 
-  socket.on('newPoll', (pollId, responses) => {
-    polls[pollId] = responses;
+  socket.on('newPoll', (pollId, pollData) => {
+    polls[pollId] = pollData;
+    schedule.scheduleJob(pollData.end, () => {
+      polls[pollId].active = false;
+      io.sockets.emit('pollData', polls[pollId]);
+    })
     console.log(polls);
   });
 
@@ -52,6 +57,11 @@ io.on('connection', (socket) => {
     polls[pollId].responses[vote]++;
     io.sockets.emit('pollData', polls[pollId]);
     console.log(polls);
+  });
+
+  socket.on('endPoll', (pollId) => {
+    polls[pollId].active = false;
+    io.sockets.emit('pollData', polls[pollId]);
   });
 
   socket.emit('statusMessage', 'You are connected!');

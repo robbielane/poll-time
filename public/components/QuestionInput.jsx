@@ -9,9 +9,12 @@ var QuestionInput = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className='form-group'>
         <label>Question: </label>
-        <input ref='questionInput' type='text' onKeyUp={this.updateQuestion} />
+        <input ref='questionInput'
+          type='text'
+          onKeyUp={this.updateQuestion}
+        className='form-control'/>
       </div>
     )
   }

@@ -13,7 +13,6 @@ body {
 
 .response-form {
   margin-top: 200px;
-  text-align: center;
   background-color: #fff;
   padding: 50px;
   border: 1px solid #666;
@@ -21,20 +20,16 @@ body {
 }
 
 .response-form label {
-  float: left;
   text-align: left;
-  margin-top: 5px;
+}
+
+.response-form .check {
+  margin: 20px 0;
 }
 
 .response-form input[type=checkbox] {
-  width:auto;
+  margin-right: 10px;
   display: inline-block;
-}
-
-.response-form input {
-  width: 85%;
-  margin: 10px auto;
-  display: block;
 }
 
 .urls {
@@ -71,4 +66,9 @@ body {
   font-size: 34px;
   font-weight: 800;
   margin-right: 5px;
+}
+
+.close-btn {
+  display: block;
+  margin: 10px auto;
 }
