@@ -2,10 +2,14 @@ import React from 'react';
 import { History } from 'react-router';
 import h from '../helpers';
 import io from 'socket.io-client';
+import Moment from 'moment';
+import momentLocalizer from 'react-widgets/lib/localizers/moment';
 
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import ResponseInput from './ResponseInput.jsx';
 import QuestionInput from './QuestionInput.jsx';
 
+momentLocalizer(Moment);
 const socket = io();
 
 var NewPoll = React.createClass({
@@ -14,7 +18,8 @@ var NewPoll = React.createClass({
       question: null,
       responses: { 1: null, 2: null },
       urls: { admin: null, poll: null },
-      hideResults: false
+      hideResults: false,
+      end: null
     }
   },
 
@@ -22,7 +27,8 @@ var NewPoll = React.createClass({
     router: React.PropTypes.object.isRequired
   },
 
-  addInput() {
+  addInput(e) {
+    e.preventDefault;
     let key = (Object.keys(this.state.responses).length + 1);
     this.state.responses[key] = '';
     this.setState({ responses: this.state.responses });
@@ -39,6 +45,7 @@ var NewPoll = React.createClass({
       const val = this.state.responses[key];
       pollData['responses'][val] = 0;
     }
+    debugger
     socket.emit('newPoll', pollId, pollData);
     this.generateLinks(pollId);
   },
@@ -73,13 +80,27 @@ var NewPoll = React.createClass({
     }
   },
 
+  updateEnd(name, value) {
+    this.setState({ end: new Date(value) })
+    debugger
+  },
+
   render() {
     return (
       <div className="response-form col-sm-6 col-sm-offset-3">
         <QuestionInput updateQuestion={this.updateQuestion} />
         {Object.keys(this.state.responses).map(this.renderForm)}
-        <input type='checkbox' defaultChecked={this.state.hideResults} ref='results' />
-        <span> Hide Results From Voters</span><br />
+        <label> End Time: </label>
+        <DateTimePicker
+          format='lll'
+          placeholder="Leave Blank to End Poll Manually"
+          parse={str => new Date(str)}
+          defaultValue={this.state.end}
+          onChange={this.updateEnd.bind(null, 'end')}/>
+        <div className='form-control check'>
+          <input type='checkbox' defaultChecked={this.state.hideResults} ref='results' />
+          <label> Hide Results From Voters</label>
+        </div>
         <button onClick={this.addInput} className='btn btn-warning btn-default'>Add Another Response</button>
         <button onClick={this.createNewPoll} className='btn btn-primary btn-default'>Submit</button>
         {Object.keys(this.state.urls).map(this.renderUrl)}
