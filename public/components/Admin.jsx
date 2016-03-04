@@ -25,9 +25,9 @@ var Admin = React.createClass({
   },
 
   handleEndPoll() {
-    this.setState({ active: false });
     if (confirm('Are you sure?')) {
       socket.emit('endPoll', this.state.pollId)
+      this.setState({ active: false });
     };
   },
 
@@ -35,7 +35,10 @@ var Admin = React.createClass({
     return (
       <div>
         <PollResults responses={this.state.responses} />
-        <button onClick={this.handleEndPoll} className='close-btn btn btn-danger'>
+        <button
+          onClick={this.handleEndPoll}
+          className='close-btn btn btn-danger'
+        disabled={!this.state.active}>
           Close Poll
         </button>
       </div>
