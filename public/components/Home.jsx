@@ -9,7 +9,6 @@ var Home = React.createClass({
   },
 
   createNewPoll() {
-    var pollId = h.generateId();
     this.context.router.push('/polls/new');
   },
 

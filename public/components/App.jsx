@@ -9,32 +9,33 @@ const socket = io();
 var App = React.createClass({
   getInitialState() {
     return {
-      pollId: null,
+      pollId: this.props.routeParams.pollId,
       question: null,
       hideResults: null,
-      responses: {}
+      responses: {},
+      voted: false
     }
   },
 
   componentDidMount() {
+    socket.emit('pollRequest', this.props.routeParams.pollId);
     socket.on('pollData', this.handleData);
+    if (localStorage[this.state.pollId]) { this.setState({ voted: true})};
   },
 
   handleData(data) {
-    let pollId    = this.props.routeParams.pollId
-    let question  = data[pollId].question;
-    let responses = data[pollId].responses;
-    let hideResults = data[pollId].hideResults;
-    this.setState({ pollId: pollId, question: question, responses: responses, hideResults: hideResults })
+    this.setState(data);
   },
 
   handleVote(vote) {
+    localStorage.setItem(this.state.pollId, true)
+    this.setState({ voted: true})
     socket.emit('vote', vote, this.state.pollId);
   },
 
   renderResponse(key) {
     return (
-      <ResponseButton key={key} handleVote={this.handleVote} name={key} />
+      <ResponseButton key={key} handleVote={this.handleVote} name={key} voted={this.state.voted} />
     )
   },
 
