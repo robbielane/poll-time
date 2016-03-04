@@ -13,7 +13,7 @@ var PollResults = React.createClass({
     let barLength = { width: this.calulateLength(key) };
     return (
       <div key={key}>
-        {key}:<div className='bar' style={barLength}></div> {this.props.responses[key]}
+        {key}:<div className='bar' style={barLength}><span className='bar-number'>{this.props.responses[key]}</span></div> 
       </div>
       )
   },

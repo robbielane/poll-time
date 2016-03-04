@@ -55,9 +55,20 @@ body {
   padding: 25px;
   border: 1px solid #666;
   border-radius: 10px;
+  font-size: 18px;
+  font-weight: 200;
 }
 
 .poll-results .bar {
   height: 50px;
   background-color: #f06d06;
+  margin-bottom: 20px;
+}
+
+.poll-results .bar .bar-number {
+  float: right;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
+  margin-right: 5px;
 }
