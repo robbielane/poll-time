@@ -5,7 +5,11 @@ var ResponseButton = React.createClass({
     let name = this.props.name
     return (
       <div className='poll-button col-sm-3'>
-        <button onClick={this.props.handleVote.bind(null, name)} className='btn btn-default'>{name}</button>
+        <button
+          onClick={this.props.handleVote.bind(null, name)}
+          disabled={this.props.voted}
+          className='btn btn-default'>{name}
+        </button>
       </div>
     )
   }
