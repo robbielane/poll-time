@@ -32422,6 +32422,7 @@
 	    };
 	  },
 	  render: function render() {
+	    var buttonText = this.state.active ? 'Close Poll' : 'Closed';
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'admin' },
@@ -32432,12 +32433,16 @@
 	      ),
 	      _react2.default.createElement(_PollResults2.default, { responses: this.state.responses }),
 	      _react2.default.createElement(
-	        'button',
-	        {
-	          onClick: this.handleEndPoll,
-	          className: 'close-btn btn btn-danger',
-	          disabled: !this.state.active },
-	        'Close Poll'
+	        'div',
+	        { className: 'col-sm-12 admin-controls' },
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            onClick: this.handleEndPoll,
+	            className: 'close-btn btn btn-danger',
+	            disabled: !this.state.active },
+	          buttonText
+	        )
 	      )
 	    );
 	  }
@@ -36411,8 +36416,10 @@
 	    return pollData;
 	  },
 	  generateLinks: function generateLinks(pollId) {
-	    this.state.urls.poll = 'http://localhost:3000/polls/' + pollId;
-	    this.state.urls.admin = 'http://localhost:3000/polls/' + pollId + '/admin';
+	    var hostname = window.location.hostname;
+	    var port = window.location.port ? ':' + window.location.port : null;
+	    this.state.urls.poll = 'http://' + hostname + port + '/polls/' + pollId;
+	    this.state.urls.admin = 'http://' + hostname + port + '/polls/' + pollId + '/admin';
 	    this.setState({ links: this.state.links });
 	  },
 	  updateResponse: function updateResponse(key, response) {
