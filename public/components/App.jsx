@@ -24,9 +24,10 @@ var App = React.createClass({
     if (localStorage[this.state.pollId]) { this.setState({ voted: true})};
   },
 
-  handleData(data) {
-    debugger;
-    this.setState(data);
+  handleData(data, pollId) {
+    if (pollId === this.state.pollId) {
+      this.setState(data);
+    }
   },
 
   handleVote(vote) {

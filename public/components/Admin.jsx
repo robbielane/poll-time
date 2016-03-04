@@ -20,8 +20,10 @@ var Admin = React.createClass({
     socket.on('pollData', this.handleData);
   },
 
-  handleData(data) {
-    this.setState(data);
+  handleData(data, pollId) {
+    if (pollId === this.state.pollId) {
+      this.setState(data);
+    }
   },
 
   handleEndPoll() {

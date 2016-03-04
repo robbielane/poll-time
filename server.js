@@ -44,25 +44,23 @@ io.on('connection', (socket) => {
     polls[pollId] = pollData;
     schedule.scheduleJob(pollData.end, () => {
       polls[pollId].active = false;
-      io.sockets.emit('pollData', polls[pollId]);
+      io.sockets.emit('pollData', polls[pollId], pollId);
     })
     console.log(polls);
   });
 
   socket.on('pollRequest', (pollId) => {
-    socket.emit('pollData', polls[pollId]);
+    socket.emit('pollData', polls[pollId], pollId);
   })
 
   socket.on('vote', (vote, pollId) => {
     polls[pollId].responses[vote]++;
-    io.sockets.emit('pollData', polls[pollId]);
+    io.sockets.emit('pollData', polls[pollId], pollId);
     console.log(polls);
   });
 
   socket.on('endPoll', (pollId) => {
     polls[pollId].active = false;
-    io.sockets.emit('pollData', polls[pollId]);
+    io.sockets.emit('pollData', polls[pollId], pollId);
   });
-
-  socket.emit('statusMessage', 'You are connected!');
 });
