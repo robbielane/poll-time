@@ -1,5 +1,5 @@
 body {
-  background-color: #ccc;
+  background-color: #eee;
 }
 
 .home {
@@ -36,12 +36,18 @@ body {
   margin-top: 20px;
 }
 
+.poll h2, .admin h2 {
+  text-align: center;
+  font-weight: 200;
+}
+
 .poll-button button {
   width: 90%;
-  height: 100px;
+  min-height: 100px;
   border: 1px solid #666;
   border-radius: 10px;
-  margin: 0 auto;
+  margin: 15px auto;
+  white-space: normal;
 }
 
 .poll-results {

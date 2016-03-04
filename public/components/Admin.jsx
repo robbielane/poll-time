@@ -33,7 +33,8 @@ var Admin = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className='admin'>
+        <h2>{this.state.question}</h2>
         <PollResults responses={this.state.responses} />
         <button
           onClick={this.handleEndPoll}

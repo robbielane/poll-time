@@ -25,6 +25,7 @@ var App = React.createClass({
   },
 
   handleData(data) {
+    debugger;
     this.setState(data);
   },
 
@@ -50,7 +51,7 @@ var App = React.createClass({
     }
     return (
       <div className='poll container-fluid'>
-        <h3>{this.state.question}</h3>
+        <h2>{this.state.question}</h2>
         {active}
         {results}
       </div>

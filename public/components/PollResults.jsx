@@ -15,7 +15,7 @@ var PollResults = React.createClass({
       <div key={key}>
         <p>{key}:</p>
         <div
-          className='bar' 
+          className='bar'
           style={barLength}>
           <span className='bar-number'>{this.props.responses[key]}</span>
         </div>
@@ -25,7 +25,7 @@ var PollResults = React.createClass({
 
   render() {
     return (
-      <div className='col-sm-6 col-sm-offset-3'>
+      <div className='col-sm-10 col-sm-offset-1'>
         <div className='poll-results'>
           {Object.keys(this.props.responses).map(this.renderResponse)}
         </div>
