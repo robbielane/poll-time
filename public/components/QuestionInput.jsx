@@ -1,7 +1,7 @@
 import React from 'react';
 
 var QuestionInput = React.createClass({
-  updateResponse() {
+  updateQuestion() {
     let key = this.props.index;
     let question = this.refs.questionInput.value;
     this.props.updateQuestion(question)
@@ -11,7 +11,7 @@ var QuestionInput = React.createClass({
     return (
       <div>
         <label>Question: </label>
-        <input ref='questionInput' type='text' onKeyUp={this.updateResponse} />
+        <input ref='questionInput' type='text' onKeyUp={this.updateQuestion} />
       </div>
     )
   }
