@@ -57,7 +57,7 @@ var NewPoll = React.createClass({
 
   generateLinks(pollId) {
     let hostname = window.location.hostname;
-    let port = window.location.port ? `:${window.location.port}` : null
+    let port = window.location.port ? `:${window.location.port}` : ''
     this.state.urls.poll = `http://${hostname}${port}/polls/${pollId}`
     this.state.urls.admin = `http://${hostname}${port}/polls/${pollId}/admin`
     this.setState({ links: this.state.links });

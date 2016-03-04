@@ -36417,7 +36417,7 @@
 	  },
 	  generateLinks: function generateLinks(pollId) {
 	    var hostname = window.location.hostname;
-	    var port = window.location.port ? ':' + window.location.port : null;
+	    var port = window.location.port ? ':' + window.location.port : '';
 	    this.state.urls.poll = 'http://' + hostname + port + '/polls/' + pollId;
 	    this.state.urls.admin = 'http://' + hostname + port + '/polls/' + pollId + '/admin';
 	    this.setState({ links: this.state.links });
