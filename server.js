@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
 
   socket.on('vote', (vote, pollId) => {
     polls[pollId].responses[vote]++;
-    io.sockets.emit('pollData', polls);
+    io.sockets.emit('pollData', polls[pollId]);
     console.log(polls);
   });
 

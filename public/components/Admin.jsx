@@ -8,21 +8,19 @@ const socket = io();
 var Admin = React.createClass({
   getInitialState() {
     return {
-      pollId: null,
+      pollId: this.props.routeParams.pollId,
       question: null,
       responses: {}
     }
   },
 
   componentDidMount() {
+    socket.emit('pollRequest', this.props.routeParams.pollId);
     socket.on('pollData', this.handleData);
   },
 
   handleData(data) {
-    let pollId    = this.props.routeParams.pollId
-    let question  = data[pollId].question;
-    let responses = data[pollId].responses;
-    this.setState({ pollId: pollId, question: question, responses: responses })
+    this.setState(data);
   },
 
   render() {
