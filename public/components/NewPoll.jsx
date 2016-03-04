@@ -36,18 +36,23 @@ var NewPoll = React.createClass({
 
   createNewPoll() {
     let pollId = h.generateId();
+    let pollData = this.generatePollData();
+    socket.emit('newPoll', pollId, pollData);
+    this.generateLinks(pollId);
+  },
+
+  generatePollData() {
     let pollData = {
       question: this.state.question,
       hideResults: this.refs.results.checked,
+      end: this.state.end,
       responses: {}
     };
     for (const key of Object.keys(this.state.responses)) {
       const val = this.state.responses[key];
       pollData['responses'][val] = 0;
     }
-    debugger
-    socket.emit('newPoll', pollId, pollData);
-    this.generateLinks(pollId);
+    return pollData
   },
 
   generateLinks(pollId) {
@@ -82,7 +87,6 @@ var NewPoll = React.createClass({
 
   updateEnd(name, value) {
     this.setState({ end: new Date(value) })
-    debugger
   },
 
   render() {
