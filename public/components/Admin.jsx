@@ -26,7 +26,9 @@ var Admin = React.createClass({
 
   handleEndPoll() {
     this.setState({ active: false });
-    socket.emit('endPoll', this.state.pollId)
+    if (confirm('Are you sure?')) {
+      socket.emit('endPoll', this.state.pollId)
+    };
   },
 
   render() {
