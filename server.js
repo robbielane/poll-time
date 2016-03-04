@@ -7,8 +7,9 @@ const socketIo   = require('socket.io');
 const schedule   = require('node-schedule');
 const app        = express();
 const polls      = {};
+const port       = process.env.PORT || 3000;
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', port);
 app.set('views', __dirname + '/views');
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,8 +32,8 @@ app.get('/polls/:id/admin', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-const server = app.listen(3000, () => {
-  console.log('listening on *:3000');
+const server = app.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });
 
 const io = socketIo(server);
