@@ -4,10 +4,15 @@ const express    = require('express');
 const path       = require('path');
 const bodyParser = require('body-parser');
 const socketIo   = require('socket.io');
+const Firebase   = require('firebase');
 const schedule   = require('node-schedule');
+
 const app        = express();
-const polls      = {};
 const port       = process.env.PORT || 3000;
+var polls        = {};
+const FireRef    = new Firebase("https://poll-time.firebaseio.com/");
+
+FireRef.on('value', (snapshot) => { polls = snapshot.val(); });
 
 app.set('port', port);
 app.set('views', __dirname + '/views');
@@ -43,25 +48,29 @@ io.on('connection', (socket) => {
 
   socket.on('newPoll', (pollId, pollData) => {
     polls[pollId] = pollData;
-    schedule.scheduleJob(pollData.end, () => {
-      polls[pollId].active = false;
-      io.sockets.emit('pollData', polls[pollId], pollId);
-    })
-    console.log(polls);
+    FireRef.child(pollId).set(polls[pollId]);
+    if (pollData.end) {
+      schedule.scheduleJob(pollData.end, () => {
+        polls[pollId].active = false;
+        FireRef.child(pollId).set(polls[pollId]);
+        io.sockets.emit('pollData', polls[pollId], pollId);
+      });
+    }
   });
 
   socket.on('pollRequest', (pollId) => {
     socket.emit('pollData', polls[pollId], pollId);
-  })
+  });
 
   socket.on('vote', (vote, pollId) => {
     polls[pollId].responses[vote]++;
+    FireRef.child(pollId).set(polls[pollId]);
     io.sockets.emit('pollData', polls[pollId], pollId);
-    console.log(polls);
   });
 
   socket.on('endPoll', (pollId) => {
     polls[pollId].active = false;
+    FireRef.child(pollId).set(polls[pollId]);
     io.sockets.emit('pollData', polls[pollId], pollId);
   });
 });
