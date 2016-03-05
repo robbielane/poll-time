@@ -21,8 +21,10 @@ var Admin = React.createClass({
   },
 
   handleData(data, pollId) {
-    if (pollId === this.state.pollId) {
+    if (data) {
       this.setState(data);
+    } else {
+      this.setState({ question: 'Poll Not Found' });
     }
   },
 
