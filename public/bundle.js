@@ -25454,8 +25454,10 @@
 	    };
 	  },
 	  handleData: function handleData(data, pollId) {
-	    if (pollId === this.state.pollId) {
+	    if (data) {
 	      this.setState(data);
+	    } else {
+	      this.setState({ question: 'Poll Not Found' });
 	    }
 	  },
 	  handleVote: function handleVote(vote) {
@@ -33215,8 +33217,10 @@
 	    socket.on('pollData', this.handleData);
 	  },
 	  handleData: function handleData(data, pollId) {
-	    if (pollId === this.state.pollId) {
+	    if (data) {
 	      this.setState(data);
+	    } else {
+	      this.setState({ question: 'Poll Not Found' });
 	    }
 	  },
 	  handleEndPoll: function handleEndPoll() {
