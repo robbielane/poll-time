@@ -10,6 +10,8 @@ const schedule   = require('node-schedule');
 const app        = express();
 const port       = process.env.PORT || 3000;
 var polls        = {};
+var server;
+
 const FireRef    = new Firebase("https://poll-time.firebaseio.com/");
 
 FireRef.on('value', (snapshot) => { polls = snapshot.val(); });
@@ -37,8 +39,6 @@ app.get('/polls/:id/admin', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-var server;
-
 if (!module.parent) {
   server = app.listen(port, () => {
    console.log(`listening on *:${port}`);
@@ -53,6 +53,7 @@ io.on('connection', (socket) => {
   socket.on('newPoll', (pollId, pollData) => {
     polls[pollId] = pollData;
     FireRef.child(pollId).set(polls[pollId]);
+
     if (pollData.end) {
       schedule.scheduleJob(pollData.end, () => {
         polls[pollId].active = false;
