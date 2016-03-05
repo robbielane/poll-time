@@ -37,9 +37,13 @@ app.get('/polls/:id/admin', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-const server = app.listen(port, () => {
-  console.log(`listening on *:${port}`);
-});
+var server;
+
+if (!module.parent) {
+  server = app.listen(port, () => {
+   console.log(`listening on *:${port}`);
+ });
+}
 
 const io = socketIo(server);
 
@@ -74,3 +78,5 @@ io.on('connection', (socket) => {
     io.sockets.emit('pollData', polls[pollId], pollId);
   });
 });
+
+module.exports = app;
