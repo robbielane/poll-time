@@ -4,7 +4,6 @@ import h from '../helpers';
 import io from 'socket.io-client';
 import Moment from 'moment';
 import momentLocalizer from 'react-widgets/lib/localizers/moment';
-import BitlyAPI from "node-bitlyapi";
 
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import ResponseInput from './ResponseInput.jsx';
@@ -12,12 +11,6 @@ import QuestionInput from './QuestionInput.jsx';
 
 momentLocalizer(Moment);
 const socket = io();
-
-const Bitly = new BitlyAPI({
-	client_id: "76ff36a4056e1ba02c2e36164b69d3d13509cc26",
-	client_secret: "a84a2ed390eb4c7db50fb7c08072ec7d831297f2"
-});
-Bitly.setAccessToken('ad7db05be8568fc71ef1f301da77f9d9a869a7c9');
 
 var NewPoll = React.createClass({
   getInitialState() {
@@ -65,12 +58,15 @@ var NewPoll = React.createClass({
   generateLinks(pollId) {
     let hostname = window.location.hostname;
     let port = window.location.port ? `:${window.location.port}` : ''
-    let poll = `http://${hostname}${port}/polls/${pollId}`
-    let admin = `http://${hostname}${port}/polls/${pollId}/admin`
-    Bitly.shorten({longUrl: poll}, (err, results) => {
-    	this.state.urls.poll = results
-    });
-    this.setState({ links: this.state.links });
+    let poll = `http://${hostname}.com/polls/${pollId}`
+    let admin = `http://${hostname}.com/polls/${pollId}/admin`
+    socket.emit('shortenUrls', {poll: poll, admin: admin});
+    socket.on('url', this.handleUrls);
+  },
+
+  handleUrls(url, key) {
+    this.state.urls[key] = url
+    this.setState({ urls: this.state.urls });
   },
 
   updateResponse(key, response) {
