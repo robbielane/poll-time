@@ -34,16 +34,19 @@ var Admin = React.createClass({
   },
 
   render() {
+    let buttonText = this.state.active ? 'Close Poll' : 'Closed'
     return (
       <div className='admin'>
         <h2>{this.state.question}</h2>
         <PollResults responses={this.state.responses} />
-        <button
-          onClick={this.handleEndPoll}
-          className='close-btn btn btn-danger'
-        disabled={!this.state.active}>
-          Close Poll
-        </button>
+        <div  className='col-sm-12 admin-controls'>
+          <button
+            onClick={this.handleEndPoll}
+            className='close-btn btn btn-danger'
+          disabled={!this.state.active}>
+          {buttonText}
+          </button>
+        </div>
       </div>
     )
   }

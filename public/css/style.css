@@ -75,6 +75,10 @@ body {
   margin-right: 5px;
 }
 
+.admin-controls {
+  margin-top: 25px;
+}
+
 .close-btn {
   display: block;
   margin: 10px auto;
