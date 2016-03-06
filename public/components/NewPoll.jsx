@@ -100,7 +100,6 @@ var NewPoll = React.createClass({
         <DateTimePicker
           format='lll'
           placeholder="Leave Blank to End Poll Manually"
-          parse={str => new Date(str)}
           defaultValue={this.state.end}
           onChange={this.updateEnd.bind(null, 'end')}/>
         <div className='form-control check'>
