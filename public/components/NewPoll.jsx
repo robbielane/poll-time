@@ -64,7 +64,7 @@ var NewPoll = React.createClass({
   },
 
   updateResponse(key, response) {
-    this.state.responses[key] = response;
+    this.state.responses[key] = response.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     this.setState({ responses: this.state.responses });
   },
 
