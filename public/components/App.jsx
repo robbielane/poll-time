@@ -1,8 +1,8 @@
 import React from 'react';
 import io from 'socket.io-client';
 
-import PollResults from './PollResults.jsx'
-import ResponseButton from './ResponseButton.jsx'
+import PollResults from './PollResults.jsx';
+import ResponseButton from './ResponseButton.jsx';
 
 const socket = io();
 
